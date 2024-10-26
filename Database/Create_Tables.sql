@@ -1,5 +1,5 @@
 -- tables
--- Table: Slownik
+-- Table: Dictionary
 CREATE TABLE Dictionary (
     dict_id int  NOT NULL identity,
     name_dict text  NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE Dictionary (
     CONSTRAINT dictionary_pk PRIMARY KEY  (dict_id)
 );
 
--- Table: Zadania
+-- Table: Tasks
 CREATE TABLE Tasks (
     Task_id int  NOT NULL identity,
     Task text  NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE Tasks (
 );
 
 
--- Table: Zadania_zakonczone
+-- Table: Tasks_Completed
 CREATE TABLE Tasks_Completed (
     Task_id int  NOT NULL,
     FinishTime date  NULL,
@@ -37,8 +37,7 @@ ALTER TABLE Tasks_Completed ADD CONSTRAINT Tasks_Completed_Tasks_fk
     FOREIGN KEY (Task_id)
     REFERENCES Tasks (Task_id);
 
--- End of file.
-
+-- Table: Users
 CREATE TABLE Users (
 	IdUser int Primary Key not null identity,
     Login nvarchar(100)  NOT NULL,
