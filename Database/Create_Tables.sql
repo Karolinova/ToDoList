@@ -1,49 +1,46 @@
--- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-04-23 09:09:05.251
-
 -- tables
--- Table: Slownik
-CREATE TABLE Dictionary (
-    dict_id int  NOT NULL identity,
-    name_dict text  NOT NULL,
-	code text NOT NULL,
-    CONSTRAINT dictionary_pk PRIMARY KEY  (dict_id)
+-- Table: Slownik contains data for dropdown lists
+CREATE TABLE Slownik (
+    slownik_id int  NOT NULL identity,
+    nazwa text  NOT NULL,
+	kod text NOT NULL,
+    CONSTRAINT slownik_pk PRIMARY KEY  (slownik_id)
 );
 
--- Table: Zadania
-CREATE TABLE Tasks (
-    Task_id int  NOT NULL identity,
-    Task text  NOT NULL,
-	DescriptTask text NOT NULL,
-    dict_id int  NOT NULL,
+-- Table: Zadania contains data about tasks
+CREATE TABLE Zadania (
+    Zadanie_id int  NOT NULL identity,
+    Zadanie text  NOT NULL,
+	Opis text NOT NULL,
+    slownik_id int  NOT NULL,
 	DoTime date,
 	StartTime date not null,
-    CONSTRAINT Tasks_pk PRIMARY KEY  (Task_id)
+    CONSTRAINT zadania_pk PRIMARY KEY  (Zadanie_id)
 );
 
 
--- Table: Zadania_zakonczone
-CREATE TABLE Tasks_Completed (
-    Task_id int  NOT NULL,
+-- Table: Zadania_zakonczone contains data on task finish time
+CREATE TABLE Zadania_zakonczone (
+    Zadanie_id int  NOT NULL,
     FinishTime date  NULL,
-    CONSTRAINT Tasks_Completed_pk PRIMARY KEY  (Task_id)
+    CONSTRAINT Zadania_zakonczone_pk PRIMARY KEY  (Zadanie_id)
+);
+
+-- Table: Uzytkownik contains login and password of users who have access to the database
+CREATE TABLE Uzytkownik (
+	IdUzytkownik int Primary Key not null identity,
+    Login nvarchar(100)  NOT NULL,
+    Haslo nvarchar(100)  NOT NULL
 );
 
 -- foreign keys
--- Reference: Tasks_Dictionary_fk (table: Tasks)
-ALTER TABLE Tasks ADD CONSTRAINT Tasks_Dictionary_fk
-    FOREIGN KEY (dict_id)
-    REFERENCES Dictionary (dict_id);
+-- Reference: Zadania_Slownik_fk (table: Zadania)
+ALTER TABLE Zadania ADD CONSTRAINT Zadania_Slownik
+    FOREIGN KEY (slownik_id)
+    REFERENCES Slownik (slownik_id);
 
--- Reference: Tasks_Completed_Tasks_fk (table: Zadania_zakonczone)
-ALTER TABLE Tasks_Completed ADD CONSTRAINT Tasks_Completed_Tasks_fk
-    FOREIGN KEY (Task_id)
-    REFERENCES Tasks (Task_id);
+-- Reference: Zadania_zakonczone_Zadania_fk (table: Zadania_zakonczone)
+ALTER TABLE Zadania_zakonczone ADD CONSTRAINT Zadania_zakonczone_Zadania
+    FOREIGN KEY (Zadanie_id)
+    REFERENCES Zadania (Zadanie_id);
 
--- End of file.
-
-CREATE TABLE Users (
-	IdUser int Primary Key not null identity,
-    Login nvarchar(100)  NOT NULL,
-    Password nvarchar(100)  NOT NULL
-);
