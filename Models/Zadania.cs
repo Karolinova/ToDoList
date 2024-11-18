@@ -8,4 +8,5 @@ public class Zadania
     public DateTime? DoTime { get; set; }
     public DateTime StartTime { get; set; } = DateTime.Now;
     public int slownik_id { get; set; }
+    public Zadania_zakonczone? ZadanieZakonczone { get; set; }
 }
