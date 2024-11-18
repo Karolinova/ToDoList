@@ -6,6 +6,7 @@ public class TDLdBContext: DbContext
     }
 
     public DbSet<Zadania> Zadanias { get; set; }
+    public DbSet<Zadania_zakonczone> Zadania_zakonczone { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
