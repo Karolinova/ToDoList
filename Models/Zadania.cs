@@ -7,6 +7,10 @@ public class Zadania
     public string Opis { get; set; } = string.Empty;
     public DateTime? DoTime { get; set; }
     public DateTime StartTime { get; set; } = DateTime.Now;
+    
     public int slownik_id { get; set; }
+    [ForeignKey("slownik_id")]
+    public Slownik? Slownik { get; set; }
+    
     public Zadania_zakonczone? ZadanieZakonczone { get; set; }
 }
