@@ -1,0 +1,16 @@
+@model Uzytkownik
+<h1>Logowanie</h1>
+<form method="post">
+    <div class="input-field col s6">
+        <input asp-for="Login" type="text" class="validate">
+        <label for="Login">Login:</label>
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div class="input-field col s6">
+        <input asp-for="Haslo" type="password" class="validate">
+        <label for="Haslo">Hasło:</label>
+        <span asp-validation-for="Haslo"></span>
+    </div>
+
+    <button type="submit">Zaloguj</button>
+</form>
