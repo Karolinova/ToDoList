@@ -15,12 +15,17 @@ public class ListController : Controller
         var uzytkHas = dbContext.Uzytkownik.Where(a => a.Haslo == user.Haslo).Count();
         if (uzytkLog > 0 && uzytkHas > 0)
         {
-            return View();//redirect to main page with list of tasks
+            return View("ListOfTasks");//redirect to main page with list of tasks
         }
         else
         {
             return View(user);
         }
         //return View(user);
+    }
+
+    public IActionResult ListOfTasks()
+    {
+         return View();
     }
 }
