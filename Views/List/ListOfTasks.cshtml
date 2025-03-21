@@ -23,7 +23,7 @@
 				<td>@zadanie.Slownik.nazwa</td>
 				<td>@(zadanie.StartTime.ToString("yyyy-MM-dd") ?? " ")</td>
 				<td>@(zadanie.DoTime?.ToString("yyyy-MM-dd") ?? " ")</td>
-				<td>@(zadanieZak?.FinishTime?.ToString("yyyy-MM-dd") ?? " ")</td> <!-- Wyświetlamy datę zakończenia, jeśli istnieje -->
+				<td>@(zadanieZak?.FinishTime?.ToString("yyyy-MM-dd") ?? " ")</td> <!-- We display the end date if exists -->
 			</tr>
 		}
 	</tboody>
