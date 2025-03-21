@@ -26,6 +26,14 @@ public class ListController : Controller
 
     public IActionResult ListOfTasks()
     {
-         return View();
+    	var dbContext = new TDLdBContext();
+		var zad = dbContext.Zadanias.Include(x => x.Slownik).ToList();
+		var zadEnd = dbContext.Zadania_zakonczone.Include(z => z.Zadania).ToList();
+		var tvm = new TasksViewModel
+		{
+			Zadanias = zad,
+			Zadania_Zakonczone = zadEnd
+		};
+		return View(tvm);
     }
 }
