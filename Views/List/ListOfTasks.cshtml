@@ -24,6 +24,10 @@
 				<td>@(zadanie.StartTime.ToString("yyyy-MM-dd") ?? " ")</td>
 				<td>@(zadanie.DoTime?.ToString("yyyy-MM-dd") ?? " ")</td>
 				<td>@(zadanieZak?.FinishTime?.ToString("yyyy-MM-dd") ?? " ")</td> <!-- We display the end date if exists -->
+				<td><a href="/List/ZakonczZadanie/@zadanie.Zadanie_id">Zakończ zadanie</a></td>
+				<td><a href="/List/DetailsTask/@zadanie.Zadanie_id">Wyświetl</a></td>
+				<td><a href="/List/EditTask/@zadanie.Zadanie_id">Edytuj</a> </td>
+				<td><a href="DeleteTask/@zadanie.Zadanie_id" method="post">Usuń</a></td>
 			</tr>
 		}
 	</tboody>
