@@ -85,5 +85,19 @@ namespace ToDoList_gh.Controllers
                 return View(vm);
             }
         }
+
+                public IActionResult DeleteTask(int id)
+        {
+            var dbContext = new TDLdBContext();
+            var TaskToDelete = new Zadania();
+            var TaskEndToDelete = new Zadania_zakonczone();
+            TaskToDelete.Zadanie_id = id;
+            TaskEndToDelete.Zadanie_id = TaskToDelete.Zadanie_id;
+            dbContext.Zadanias.Attach(TaskToDelete);
+            dbContext.Zadanias.Remove(TaskToDelete);
+            dbContext.Zadania_zakonczone.Remove(TaskEndToDelete);
+            dbContext.SaveChanges();
+            return RedirectToAction("ListOfTasks");
+        }
     }
 }
