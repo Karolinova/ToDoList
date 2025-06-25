@@ -1,0 +1,14 @@
+body {
+    padding: 2rem;
+}
+
+.nav-wrapper {
+    background-color: aquamarine;
+}
+
+/*Strona główna*/
+.main-home {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
