@@ -135,7 +135,7 @@ namespace ToDoList_gh.Controllers
             }
         }
 
-                public IActionResult DetailsTask(int id)
+        public IActionResult DetailsTask(int id)
         {
             var dbContext = new TDLdBContext();
             var zadDet = dbContext.Zadanias.Where(z => z.Zadanie_id == id).ToList();
@@ -144,6 +144,42 @@ namespace ToDoList_gh.Controllers
             tvm.Zadanias = zadDet;
             tvm.Zadania_Zakonczone = zadEnd;
             return View(tvm);
+        }
+
+        [HttpGet]
+        public IActionResult ZakonczZadanie(int id)
+        {
+        using (var dbContext = new TDLdBContext())
+            {   
+            var zadEnd = dbContext.Zadania_zakonczone.FirstOrDefault(z => z.Zadanie_id == id);
+            return View(zadEnd);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ZakonczZadanie(int id, Zadania_zakonczone model)
+        {
+        using (var dbContext = new TDLdBContext())
+            {
+            var zadEnd = new Zadania_zakonczone();
+            zadEnd.Zadanie_id = id;
+            dbContext.Zadania_zakonczone.Attach(zadEnd);
+            if (zadEnd != null)
+            {
+                zadEnd.FinishTime = model.FinishTime;
+                if (zadEnd.FinishTime > DateTime.Now)
+                {
+                    return View();
+                }
+                else
+                {
+                    dbContext.SaveChanges();
+                    return RedirectToAction("ListOfTasks");
+                }
+            }   
+            else
+            return View();
+            }
         }
     }
 }

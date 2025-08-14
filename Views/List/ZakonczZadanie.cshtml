@@ -1,0 +1,14 @@
+@using ToDoList_gh.ViewModels
+@model Zadania_zakonczone
+
+<h1>Zakończ zadanie</h1>
+<form method="post">
+    <div>
+        <input asp-for="FinishTime" type="date" class="calender">
+        <label for="FinishTime">Wybierz datę zakończenia zadania</label>
+        <span asp-validation-for="FinishTime"></span>
+    </div>
+    <button type="submit">Zakończ</button>
+    <a href="/List/ListOfTasks" class="btn">Wróć</a>
+</form>
+
