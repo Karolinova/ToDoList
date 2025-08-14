@@ -1,0 +1,34 @@
+@using ToDoList_gh.ViewModels
+@model TasksViewModel
+
+<h4>Edytuj zadanie</h4>
+<form method="post">
+    <div class="input-field col s6">
+        <input asp-for="Zadania.Zadanie" type="text" class="validate">
+        <label for="Zadanie">Zadanie</label>
+        <span asp-validation-for="Zadania.Zadanie"></span>
+    </div>
+    <div class="input-field col s6">
+        <input asp-for="Zadania.Opis" type="text" class="validate">
+        <label for="Opis">Opis zadania</label>
+        <span asp-validation-for="Zadania.Opis"></span>
+    </div>
+    <div>
+        <input asp-for="Zadania.DoTime" type="date" class="calender">
+        <label for="DoTime">Przewidywany termin realizacji</label>
+        <span asp-validation-for="Zadania.DoTime"></span>
+    </div>
+    <div>
+
+        <label asp-for="Zadania.slownik_id" title="Wybierz priorytet zadania">Priorytet</label>
+        <select asp-for="Zadania.slownik_id" class="validate" style="display: inline">
+            @foreach (var item in Model.Slownik)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+        <span asp-validation-for="Zadania.slownik_id" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn">Edytuj</button>
+    <a href="/List/ListOfTasks" class="btn">Wróć</a>
+</form>

@@ -86,7 +86,7 @@ namespace ToDoList_gh.Controllers
             }
         }
 
-                public IActionResult DeleteTask(int id)
+        public IActionResult DeleteTask(int id)
         {
             var dbContext = new TDLdBContext();
             var TaskToDelete = new Zadania();
@@ -98,6 +98,41 @@ namespace ToDoList_gh.Controllers
             dbContext.Zadania_zakonczone.Remove(TaskEndToDelete);
             dbContext.SaveChanges();
             return RedirectToAction("ListOfTasks");
+        }
+
+                public IActionResult EditTask(int id)
+        {
+            using (var dbContext = new TDLdBContext())
+            {
+                var zadEdT = dbContext.Zadanias.FirstOrDefault(z => z.Zadanie_id == id);
+                var slowniki = dbContext.Slownik.Select(x => new SelectListItem(x.nazwa, x.slownik_id + "")).ToList();
+                return View(new TasksViewModel()
+                {
+                    Zadania = zadEdT,
+                    Slownik = slowniki,
+                });
+            }
+        }
+        [HttpPost]
+        public IActionResult EditTask(int id, TasksViewModel modelZad)
+        {
+            using (var dbContext = new TDLdBContext())
+            {
+                var zadEdit = dbContext.Zadanias.FirstOrDefault(z => z.Zadanie_id == id);
+                if (ModelState.IsValid == true)
+                {
+                    if (zadEdit != null)
+                    {
+                        zadEdit.Zadanie = modelZad.Zadania.Zadanie;
+                        zadEdit.Opis = modelZad.Zadania.Opis;
+                        zadEdit.DoTime = modelZad.Zadania.DoTime;
+                        zadEdit.slownik_id = modelZad.Zadania.slownik_id;
+                        dbContext.SaveChanges();
+                        return RedirectToAction("ListOfTasks");
+                    }
+                }
+                return View();
+            }
         }
     }
 }
