@@ -134,5 +134,16 @@ namespace ToDoList_gh.Controllers
                 return View();
             }
         }
+
+                public IActionResult DetailsTask(int id)
+        {
+            var dbContext = new TDLdBContext();
+            var zadDet = dbContext.Zadanias.Where(z => z.Zadanie_id == id).ToList();
+            var zadEnd = dbContext.Zadania_zakonczone.Where(z => z.Zadanie_id == id).ToList();
+            var tvm = new TasksViewModel();
+            tvm.Zadanias = zadDet;
+            tvm.Zadania_Zakonczone = zadEnd;
+            return View(tvm);
+        }
     }
 }
